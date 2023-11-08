@@ -1702,4 +1702,97 @@ class portalController extends DBController
     }
 
 
+    function addYear($yr1, $yr2, $gencode)
+    {
+        date_default_timezone_set('Asia/Manila');
+        $query = "INSERT INTO school_year (yr1, yr2, gencode, date_created) VALUES (?,?,?,?)"; 
+        $params = array(    
+            array(
+                "param_type" => "s",
+                "param_value" => $yr1
+            ),array(
+                "param_type" => "s",
+                "param_value" => $yr2
+            ),array(
+                "param_type" => "i",
+                "param_value" => $gencode
+            ),
+            array(
+                "param_type" => "s",
+                "param_value" => date('Y-m-d')
+            )
+        );
+        
+        $this->insertDB($query, $params);
+    }
+
+    function getYear()
+    {
+        $query = "SELECT * FROM school_year";
+        $allYear= $this->getDBResult($query);
+        return $allYear;
+    }
+
+
+    function addYearSection($sycode, $student_accepted, $min, $max, $level, $section)
+    {
+        $query = "INSERT INTO section_legen (sycode, student_accepted, min, max, level, section) VALUES (?,?,?,?,?,?)"; 
+        $params = array(    
+            array(
+                "param_type" => "i",
+                "param_value" => $sycode
+            ),array(
+                "param_type" => "i",
+                "param_value" => $student_accepted
+            ),array(
+                "param_type" => "i",
+                "param_value" => $min
+            ),array(
+                "param_type" => "i",
+                "param_value" => $max
+            ),array(
+                "param_type" => "i",
+                "param_value" => $level
+            ),
+            array(
+                "param_type" => "s",
+                "param_value" => $section
+            )
+        );
+        
+        $this->insertDB($query, $params);
+    }
+
+    function sectionForSchoolYear($sycode)
+    {
+        $query = "SELECT * FROM section_legen WHERE sycode = ?"; 
+
+        $params = array(
+            array(
+                "param_type" => "i",
+                "param_value" => $sycode
+            )
+        );
+
+
+        $sectionLeg = $this->getDBResult($query, $params);
+        return $sectionLeg;
+    }
+    
+    function sectionForSchoolYearMasterList($sid)
+    {
+        $query = "SELECT * FROM user_information UI LEFT JOIN section_legen SL ON UI.section  = SL.section AND UI.level = SL.level WHERE SL.sid = ?"; 
+
+        $params = array(
+            array(
+                "param_type" => "i",
+                "param_value" => $sid
+            )
+        );
+
+
+        $sectionMaster = $this->getDBResult($query, $params);
+        return $sectionMaster;
+    }
+
 }

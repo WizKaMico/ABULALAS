@@ -15,7 +15,7 @@
   <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.css">
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css'>
-
+  <link rel="stylesheet" type="text/css" href="dt/datatable/dataTable.bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="css/main.css">
 
@@ -47,6 +47,7 @@
         <li><i class="fa fa-desktop"></i><a href="home.php?view=monitoring" style="text-decoration:none; color:white;">Accounts</a></li>
         <li><i class="fa fa-desktop"></i><a href="home.php?view=teacher" style="text-decoration:none; color:white;">Teacher Accounts</a></li>
         <li><i class="fa fa-book"></i><a href="home.php?view=subject" style="text-decoration:none; color:white;">Subject</a></li>
+        <li><i class="fa fa-book"></i><a href="home.php?view=year" style="text-decoration:none; color:white;">School Year</a></li>
         <li><i class="fa fa-bullhorn"></i><a href="home.php?view=announcement" style="text-decoration:none; color:white;">Announcement</a></li>
         <li><i class="fa fa-question-circle"></i><a href="home.php?view=lost" style="text-decoration:none; color:white;">Lost & Found</a></li>
         <?php } else if($userSession[0]["designation"] == 2) { ?>
@@ -88,11 +89,18 @@
         <?php include('pages/chart.php'); ?> 
         <?php } else if($_GET['view'] == 'map') { ?>
         <?php include('pages/map.php'); ?> 
+        <?php } else if($_GET['view'] == 'school_year_section') { ?>  
+        <?php include('pages/school_year_section.php'); ?> 
+        <?php } else if($_GET['view'] == 'classmasterlist') { ?>  
+        <?php include('pages/classmasterlist.php'); ?> 
+        <?php } else if($_GET['view'] == 'year') { ?>
+        <?php include('pages/year.php'); ?>    
         <?php } else if($_GET['view'] == 'evaluate') { ?>
         <?php include('pages/evaluate.php'); ?>   
         <?php } else if($_GET['view'] == 'credentials') { ?>
         <?php include('pages/credentials.php'); ?> 
         <?php } else if($_GET['view'] == 'teacher') { ?>
+
         <?php include('pages/teacher.php'); ?> 
         <?php } else {  ?>
         <?php include('pages/home.php'); ?>
@@ -226,6 +234,88 @@
   <?php include('modal/request-add.php'); ?>
   <?php include('modal/request-edit.php'); ?>
   <script src="js/request-request-aggrid.js"></script>
+  <?php } else if($_GET['view'] == 'year'){ ?>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get references to the button and modal
+      const createSchYearBtn = document.getElementById('createSchYearBtn');
+      const modal = document.getElementById('CreateNewYear'); // Use the correct modal ID
+
+      // Add a click event listener to the button
+      createSchYearBtn.addEventListener('click', () => {
+        // Display the modal
+        modal.style.display = 'block';
+      });
+
+      // Add a click event listener to close the modal when clicking outside of it
+      window.addEventListener('click', function(event) {
+        if (event.target === modal) {
+          modal.style.display = 'none';
+        }
+      });
+    });
+
+  </script>
+  <?php include('modal/year-add.php'); ?>
+  <script src="js/year-aggrid.js"></script>
+  <?php } else if($_GET['view'] == 'school_year_section'){ ?>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get references to the button and modal
+      const createSchSectionYearBtn = document.getElementById('createSchSectionYearBtn');
+      const modal = document.getElementById('CreateNewSectionYear'); // Use the correct modal ID
+
+      // Add a click event listener to the button
+      createSchSectionYearBtn.addEventListener('click', () => {
+        // Display the modal
+        modal.style.display = 'block';
+      });
+
+      // Add a click event listener to close the modal when clicking outside of it
+      window.addEventListener('click', function(event) {
+        if (event.target === modal) {
+          modal.style.display = 'none';
+        }
+      });
+    });
+
+  </script>
+
+  
+  <?php include('modal/section-year-add.php'); ?>
+  <script src="dt/jquery/jquery.min.js"></script>
+  <script src="dt/bootstrap/js/bootstrap.min.js"></script>
+  <script src="dt/datatable/jquery.dataTables.min.js"></script>
+  <script src="dt/datatable/dataTable.bootstrap.min.js"></script>
+  <script>
+$(document).ready(function(){
+	//inialize datatable
+    $('#myTable').DataTable();
+
+    //hide alert
+    $(document).on('click', '.close', function(){
+    	$('.alert').hide();
+    })
+});
+</script>
+
+<?php } else if($_GET['view'] == 'classmasterlist'){ ?>
+
+  <script src="dt/jquery/jquery.min.js"></script>
+  <script src="dt/bootstrap/js/bootstrap.min.js"></script>
+  <script src="dt/datatable/jquery.dataTables.min.js"></script>
+  <script src="dt/datatable/dataTable.bootstrap.min.js"></script>
+  <script>
+$(document).ready(function(){
+	//inialize datatable
+    $('#myTable').DataTable();
+
+    //hide alert
+    $(document).on('click', '.close', function(){
+    	$('.alert').hide();
+    })
+});
+</script>
   <?php } else if($_GET['view'] == 'announcement'){?>
     <script>
     document.addEventListener('DOMContentLoaded', function() {

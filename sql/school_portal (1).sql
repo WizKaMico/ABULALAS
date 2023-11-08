@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 05, 2023 at 05:47 PM
+-- Generation Time: Nov 09, 2023 at 12:40 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -227,11 +227,34 @@ INSERT INTO `school_whereabout` (`id`, `uid`, `time_in`, `time_out`, `room`, `da
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `school_year`
+--
+
+CREATE TABLE `school_year` (
+  `syid` int(11) NOT NULL,
+  `yr1` date NOT NULL,
+  `yr2` date NOT NULL,
+  `gencode` int(225) NOT NULL,
+  `date_created` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `school_year`
+--
+
+INSERT INTO `school_year` (`syid`, `yr1`, `yr2`, `gencode`, `date_created`) VALUES
+(1, '2024-01-01', '2025-01-01', 797006, '2023-11-09');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `section_legen`
 --
 
 CREATE TABLE `section_legen` (
   `sid` int(11) NOT NULL,
+  `sycode` int(50) NOT NULL,
+  `student_accepted` int(11) NOT NULL,
   `min` int(50) NOT NULL,
   `max` int(50) NOT NULL,
   `level` int(50) NOT NULL,
@@ -242,32 +265,33 @@ CREATE TABLE `section_legen` (
 -- Dumping data for table `section_legen`
 --
 
-INSERT INTO `section_legen` (`sid`, `min`, `max`, `level`, `section`) VALUES
-(1, 90, 99, 1, 'SECTION 1'),
-(2, 80, 89, 1, 'SECTION 2'),
-(3, 75, 79, 1, 'SECTION 3'),
-(4, 90, 99, 2, 'SECTION 1'),
-(5, 80, 89, 2, 'SECTION 2'),
-(6, 75, 79, 2, 'SECTION 3'),
-(7, 90, 99, 3, 'SECTION 1'),
-(8, 80, 89, 3, 'SECTION 2'),
-(9, 75, 79, 3, 'SECTION 3'),
-(10, 90, 99, 4, 'SECTION 1'),
-(11, 80, 89, 4, 'SECTION 2'),
-(12, 75, 79, 4, 'SECTION 3'),
-(13, 90, 99, 5, 'SECTION 1'),
-(14, 80, 89, 5, 'SECTION 2'),
-(15, 75, 79, 5, 'SECTION 3'),
-(16, 90, 99, 6, 'SECTION 1'),
-(17, 80, 89, 6, 'SECTION 2'),
-(18, 75, 79, 6, 'SECTION 3'),
-(19, 90, 99, 7, 'SECTION 1'),
-(20, 80, 89, 7, 'SECTION 2'),
-(21, 75, 79, 7, 'SECTION 3'),
-(22, 90, 99, 8, 'SECTION 1'),
-(23, 80, 89, 8, 'SECTION 2'),
-(24, 75, 79, 8, 'SECTION 3'),
-(25, 64, 74, 1, 'SECTION 4');
+INSERT INTO `section_legen` (`sid`, `sycode`, `student_accepted`, `min`, `max`, `level`, `section`) VALUES
+(1, 797006, 30, 90, 99, 1, 'SECTION 1'),
+(2, 797006, 30, 80, 89, 1, 'SECTION 2'),
+(3, 797006, 30, 75, 79, 1, 'SECTION 3'),
+(4, 797006, 30, 90, 99, 2, 'SECTION 1'),
+(5, 797006, 30, 80, 89, 2, 'SECTION 2'),
+(6, 797006, 30, 75, 79, 2, 'SECTION 3'),
+(7, 797006, 30, 90, 99, 3, 'SECTION 1'),
+(8, 797006, 30, 80, 89, 3, 'SECTION 2'),
+(9, 797006, 30, 75, 79, 3, 'SECTION 3'),
+(10, 797006, 30, 90, 99, 4, 'SECTION 1'),
+(11, 797006, 30, 80, 89, 4, 'SECTION 2'),
+(12, 797006, 30, 75, 79, 4, 'SECTION 3'),
+(13, 797006, 30, 90, 99, 5, 'SECTION 1'),
+(14, 797006, 30, 80, 89, 5, 'SECTION 2'),
+(15, 797006, 30, 75, 79, 5, 'SECTION 3'),
+(16, 797006, 30, 90, 99, 6, 'SECTION 1'),
+(17, 797006, 30, 80, 89, 6, 'SECTION 2'),
+(18, 797006, 30, 75, 79, 6, 'SECTION 3'),
+(19, 797006, 30, 90, 99, 7, 'SECTION 1'),
+(20, 797006, 30, 80, 89, 7, 'SECTION 2'),
+(21, 797006, 30, 75, 79, 7, 'SECTION 3'),
+(22, 797006, 30, 90, 99, 8, 'SECTION 1'),
+(23, 797006, 30, 80, 89, 8, 'SECTION 2'),
+(24, 797006, 30, 75, 79, 8, 'SECTION 3'),
+(25, 797006, 30, 64, 74, 1, 'SECTION 4'),
+(26, 797006, 30, 60, 63, 1, 'SECTION 5');
 
 -- --------------------------------------------------------
 
@@ -544,7 +568,8 @@ INSERT INTO `user_security` (`id`, `uid`, `email`, `code`, `status`, `date_creat
 (7, '890319', 'tricore012@gmail.com', 7041, 'USED', '2023-11-06'),
 (8, '1012138988', 'revcoreitsolution@gmail.com', 9313, 'USED', '2023-11-06'),
 (9, '833353', 'tricore012@gmail.com', 8534, 'USED', '2023-11-06'),
-(10, '890319', 'tricore012@gmail.com', 7945, 'USED', '2023-11-06');
+(10, '890319', 'tricore012@gmail.com', 7945, 'USED', '2023-11-06'),
+(11, '1012138988', 'revcoreitsolution@gmail.com', 9377, 'USED', '2023-11-09');
 
 -- --------------------------------------------------------
 
@@ -645,6 +670,12 @@ ALTER TABLE `remember_me_tokens`
 --
 ALTER TABLE `school_whereabout`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `school_year`
+--
+ALTER TABLE `school_year`
+  ADD PRIMARY KEY (`syid`);
 
 --
 -- Indexes for table `section_legen`
@@ -765,10 +796,16 @@ ALTER TABLE `school_whereabout`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `school_year`
+--
+ALTER TABLE `school_year`
+  MODIFY `syid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `section_legen`
 --
 ALTER TABLE `section_legen`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `subject_matter`
@@ -816,7 +853,7 @@ ALTER TABLE `user_request`
 -- AUTO_INCREMENT for table `user_security`
 --
 ALTER TABLE `user_security`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `user_student_history`

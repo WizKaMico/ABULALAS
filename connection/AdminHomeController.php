@@ -519,6 +519,37 @@ if (!empty($_GET["action"])) {
                                     }
                                 }
                                 break;
+
+
+                            case "addyear":
+                                if(isset($_POST['add'])){
+                                    $yr1 = $_POST['yr1'];
+                                    $yr2 = $_POST['yr2'];
+                                    $gencode = rand(666666,999999);
+
+                                    if(!empty($yr1) && !empty($yr2) && !empty($gencode)){
+                                        $portCont->addYear($yr1, $yr2, $gencode);
+                                        header('Location: home.php?view=year');
+                                    }
+                                }
+                                break;
+
+                            case "addsectionyear":
+                                if(isset($_POST['add'])){
+                                    $sycode = $_POST['sycode']; 
+                                    $student_accepted = $_POST['student_accepted'];
+                                    $min = $_POST['min'];
+                                    $max = $_POST['max'];
+                                    $level = $_POST['level'];
+                                    $section = $_POST['section']; 
+
+                                    if(!empty($sycode) && !empty($student_accepted) && !empty($min) && !empty($max) && !empty($level) && !empty($section)){
+                                        $portCont->addYearSection($sycode, $student_accepted, $min, $max, $level, $section);
+                                        header('Location: home.php?view=school_year_section&code='.$sycode.'&message=success');
+                                    }else{
+                                        header('Location: home.php?view=school_year_section&code='.$sycode.'&message=error');
+                                    }
+                                }
                 
                 
 
